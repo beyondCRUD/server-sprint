@@ -1,0 +1,8 @@
+version: '3'
+services:
+  php:
+    image: ramageek/php:8.2-laravel-api
+    ports:
+      - '${APP_PORT:-8000}:80'
+    volumes:
+      - '.:/var/www/html'
