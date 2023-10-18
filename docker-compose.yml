@@ -6,3 +6,21 @@ services:
       - '${APP_PORT:-8000}:80'
     volumes:
       - '.:/var/www/html'
+    networks:
+      - sprint
+  pgsql:
+    image: 'postgres:15'
+    ports:
+      - '${FORWARD_DB_PORT:-8001}:5432'
+    environment:
+      PGPASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+    volumes:
+      - './storage/postgres:/var/lib/postgresql/data'
+    networks:
+      - sprint
+networks:
+  sprint:
+    driver: bridge
