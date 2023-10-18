@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('saas', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('client');
             $table->string('client_name');
             $table->uuid('hostname_id')->unsigned()->nullable();

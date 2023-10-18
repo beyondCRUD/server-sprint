@@ -30,10 +30,10 @@ return [
          */
 
         // Must implement \Hyn\Tenancy\Contracts\Hostname
-        'hostname' => \Hyn\Tenancy\Models\Hostname::class,
+        'hostname' => \App\Models\Tenancy\Hostname::class,
 
         // Must implement \Hyn\Tenancy\Contracts\Website
-        'website' => \Hyn\Tenancy\Models\Website::class
+        'website' => \App\Models\Tenancy\Website::class
     ],
     /**
      * The package middleware. Removing a middleware here will disable it.
@@ -197,7 +197,7 @@ return [
          *
          * @see src/Database/Connection.php
          */
-        'tenant-division-mode' => env('TENANCY_DATABASE_DIVISION_MODE', 'database'),
+        'tenant-division-mode' => env('TENANCY_DATABASE_DIVISION_MODE', 'schema'),
 
         /**
          * The database password generator takes care of creating a valid hashed
@@ -228,9 +228,9 @@ return [
          *
          * @warn specify a valid fully qualified class name.
          */
-        'tenant-seed-class' => false,
-//      eg an admin seeder under `app/Seeders/AdminSeeder.php`:
-//        'tenant-seed-class' => App\Seeders\AdminSeeder::class,
+        'tenant-seed-class' => true,
+        //      eg an admin seeder under `app/Seeders/AdminSeeder.php`:
+        'tenant-seed-class' => Database\Seeders\UserSeeder::class,
 
         /**
          * Automatically generate a tenant database based on the random id of the
@@ -296,10 +296,10 @@ return [
          * @info Useful for overriding the connection of third party packages.
          */
         'force-tenant-connection-of-models' => [
-//            App\User::class
+            // App\User::class
         ],
         'force-system-connection-of-models' => [
-//            App\User::class
+            // App\User::class
         ],
     ],
 

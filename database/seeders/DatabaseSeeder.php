@@ -3,6 +3,13 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Actions\CreatingSaasAction;
+use App\Data\SaasData;
+use App\Models\Saas;
+use App\Models\User;
+use Hyn\Tenancy\Models\Hostname;
+use Hyn\Tenancy\Models\Website;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +19,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        Saas::query()->truncate();
+        Website::query()->truncate();
+        Hostname::query()->truncate();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        /** @var CreatingSaasAction $action */
+        $action = app(CreatingSaasAction::class);
+        $action->execute(SaasData::mainTenant());
     }
 }
